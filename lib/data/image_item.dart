@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'dart:typed_data';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 
 class ImageItem {
   int width = 300;
   int height = 300;
-  Uint8List image = Uint8List.fromList([]);
+  XFile? image;
   Completer loader = Completer();
 
   ImageItem([dynamic img]) {
@@ -22,25 +22,20 @@ class ImageItem {
     if (imageFile is ImageItem) {
       height = imageFile.height;
       width = imageFile.width;
-
       image = imageFile.image;
       loader.complete(true);
-    } else if (imageFile is Uint8List) {
+    } else if (imageFile is XFile) {
       image = imageFile;
-      decodedImage = await decodeImageFromList(imageFile);
+      decodedImage = await decodeImageFromList(await imageFile.readAsBytes());
     } else {
-      image = await imageFile.readAsBytes();
-      decodedImage = await decodeImageFromList(image);
+      image = XFile(imageFile.path); // Assuming imageFile is a File or similar
+      decodedImage = await decodeImageFromList(await imageFile.readAsBytes());
     }
 
     // image was decoded
     if (decodedImage != null) {
-      // print(['height', viewportSize.height, decodedImage.height]);
-      // print(['width', viewportSize.width, decodedImage.width]);
-
       height = decodedImage.height;
       width = decodedImage.width;
-
       loader.complete(decodedImage);
     }
 

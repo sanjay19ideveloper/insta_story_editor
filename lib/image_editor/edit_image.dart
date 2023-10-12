@@ -2,6 +2,10 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_editor_plus/image_editor_plus.dart';
+import 'package:share_plus/share_plus.dart';
+
+
+
 
 class ImageEditorExample extends StatefulWidget {
   final Uint8List? imageData;
@@ -17,6 +21,7 @@ class ImageEditorExample extends StatefulWidget {
 
 class _ImageEditorExampleState extends State<ImageEditorExample> {
   Uint8List? editedImageResult;
+  
 
   @override
   void initState() {
@@ -57,7 +62,15 @@ class _ImageEditorExampleState extends State<ImageEditorExample> {
               var editedImage = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ImageEditor(
+                  builder: (context) => 
+                  // StoriesEditor(giphyKey: 'wLfKlamIVJ4QkhCvqBHp0jr2OmOC29aF',
+                  //           //fontFamilyList: const ['Shizuru', 'Aladin'],
+                  //           galleryThumbnailQuality: 300,
+                  //         isCustomFontList: true,
+                  //           onDone: (uri) {
+                  //             debugPrint(uri);
+                  //             Share.shareFiles([uri]);}
+                  ImageEditor(
                     image: widget.imageData,
                   ),
                 ),

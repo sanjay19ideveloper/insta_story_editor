@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'image_editor/edit_image.dart';
+import 'image_editor/text_editor.dart';
 
 void main() {
   runApp(
@@ -47,6 +48,7 @@ class _MyAppState extends State<MyApp> {
               ,
               onPressed: (){
               showImagePickerDialog(context);
+              // Navigator.push(context, MaterialPageRoute(builder: ((context) => TextRditorPage(title: '',))));
             }, child: SizedBox(
               width: 80,
               child: Row(
